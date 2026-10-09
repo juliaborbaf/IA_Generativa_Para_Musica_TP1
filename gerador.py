@@ -54,7 +54,6 @@ def sortear_producao(simbolo, regras, temperatura):
     
     return [simbolo]
 
-
 def expandir(simbolo, regras, temperatura):
     # se o símbolo for um terminal
     if simbolo not in regras:
