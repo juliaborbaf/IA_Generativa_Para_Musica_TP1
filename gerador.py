@@ -32,3 +32,42 @@ gramatica_pop = {
     
     # micro
 }
+
+# mudança de hiperparâmetro
+def aplicar_temperatura(pesos_originais, temperatura):
+    if temperatura == 0:
+        novos_pesos = [0.0] * len(pesos_originais)
+        indice_maximo = pesos_originais.index(max(pesos_originais))
+        novos_pesos[indice_maximo] = 1.0
+        return novos_pesos
+        
+    return [peso ** (1.0 / temperatura) for peso in pesos_originais]
+
+def sortear_producao(simbolo, regras, temperatura):
+    if simbolo in regras:
+        opcoes = regras[simbolo]['producoes']
+        probabilidades = regras[simbolo]['pesos']
+        
+        pesos_ajustados = aplicar_temperatura(probabilidades, temperatura)
+        escolha = random.choices(opcoes, weights=pesos_ajustados, k=1)[0]
+        return escolha
+    
+    return [simbolo]
+
+
+def expandir(simbolo, regras, temperatura):
+    # se o símbolo for um terminal
+    if simbolo not in regras:
+        return [simbolo]
+    
+    # se for não-terminal, sorteia a produção usando a temperatura
+    producao = sortear_producao(simbolo, regras, temperatura)
+    
+    # loop recursivo
+    resultado_final = []
+    for s in producao:
+        resultado_final.extend(expandir(s, regras, temperatura))
+        
+    return resultado_final
+
+# print(expandir('MUSICA', gramatica_pop, temperatura=1.0))
