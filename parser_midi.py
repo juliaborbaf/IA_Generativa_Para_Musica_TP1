@@ -1,6 +1,6 @@
 import pretty_midi
 
-def gerar_midi(lista_eventos, nome_arquivo="musica_gerada.mid", bpm=120):
+def gerar_midi(lista_eventos, nome_arquivo="musica_gerada.mid", bpm=120, offset = 0):
     midi_obj = pretty_midi.PrettyMIDI()
 
     # instrumentos
@@ -40,6 +40,7 @@ def gerar_midi(lista_eventos, nome_arquivo="musica_gerada.mid", bpm=120):
             
             # se não for pausa, adiciona a nota
             if pitch > 0:
+                pitch += offset  # aplica o offset na nota
                 nota = pretty_midi.Note(
                     velocity=100, 
                     pitch=pitch, 
@@ -55,20 +56,21 @@ def gerar_midi(lista_eventos, nome_arquivo="musica_gerada.mid", bpm=120):
         elif evento.startswith('!CHORD'):
             _, cifra, duracao_str = evento.split('_')
             duracao = float(duracao_str) * fator_tempo
+
+            if cifra != '0':
+                notas_acorde = dicionario_acordes[cifra]
             
-            notas_acorde = dicionario_acordes[cifra]
-            
-            # adiciona cada nota do acorde separadamente
-            for pitch_acorde in notas_acorde:
-                nota = pretty_midi.Note(
-                    velocity=80, 
-                    pitch=pitch_acorde, 
-                    start=cursor_tempo, 
-                    end=cursor_tempo + duracao
-                )
-                inst_acordes.notes.append(nota)
-                
-            # cursor avança só uma vez pela duração do acorde inteiro
+                # adiciona cada nota do acorde separadamente
+                for pitch_acorde in notas_acorde:
+                    nota = pretty_midi.Note(
+                        velocity=80, 
+                        pitch=pitch_acorde + offset,  # aplica o offset na nota
+                        start=cursor_tempo, 
+                        end=cursor_tempo + duracao
+                    )
+                    inst_acordes.notes.append(nota)
+                    
+                # cursor avança só uma vez pela duração do acorde inteiro
             cursor_tempo += duracao
 
     midi_obj.instruments.append(inst_acordes)

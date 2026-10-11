@@ -11,12 +11,21 @@ gramatica_pop = {
             ['VERSO', 'REFRAO', 'VERSO', 'REFRAO'],                             
             ['REFRAO', 'VERSO', 'REFRAO', 'PONTE', 'REFRAO']                    
         ],
-        'pesos': [0.60, 0.25, 0.15]
+        'pesos': [0.50, 0.30, 0.20]
     },
+    
     'INTRO': {
-        'producoes': [['PUSH_T', 'ACORDES_LONGOS', 'POP_T', 'MELODIA_PAUSA']],
-        'pesos': [1.0]
+        'producoes': [
+            # piano lento com pausa
+            ['PUSH_T', 'ACORDES_LONGOS', 'POP_T', 'MELODIA_PAUSA'],
+            # piano rítmico e sintetizador esparso
+            ['PUSH_T', 'ACORDES_COMPASSADOS', 'POP_T', 'MELODIA_ESPARSA'],
+            # começa explosiva
+            ['PUSH_T', 'ACORDES_PULSANTES', 'POP_T', 'MELODIA_ENERGICA']
+        ],
+        'pesos': [0.2, 0.4, 0.4] 
     },
+
     'PONTE': {
         'producoes': [['PUSH_T', 'ACORDES_LONGOS', 'POP_T', 'MELODIA_ESPARSA']],
         'pesos': [1.0]
@@ -28,7 +37,7 @@ gramatica_pop = {
             ['PUSH_T', 'ACORDES_LONGOS', 'POP_T', 'MELODIA_ESPARSA'],
             ['PUSH_T', 'ACORDES_PULSANTES', 'POP_T', 'MELODIA_SINCOPADA']
         ],
-        'pesos': [0.70, 0.30]
+        'pesos': [0.50, 0.50]
     },
     'REFRAO': {
         'producoes': [
@@ -41,38 +50,27 @@ gramatica_pop = {
     # micro
     'ACORDES_LONGOS': {
         'producoes': [
-            # I-V-vi-IV
             ['!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0', '!CHORD_F_4.0'],
-            # vi-IV-I-V
-            ['!CHORD_Am_4.0', '!CHORD_F_4.0', '!CHORD_C_4.0', '!CHORD_G_4.0'],
-            # I-IV-vi-V
-            ['!CHORD_C_4.0', '!CHORD_F_4.0', '!CHORD_Am_4.0', '!CHORD_G_4.0']
-        ], 
-        'pesos': [0.4, 0.3, 0.3]
+            ['!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0', '!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0'],            # I-IV-vi-V
+            ['!CHORD_C_2.0', '!CHORD_0_2.0', '!CHORD_F_2.0', '!CHORD_0_2.0', '!CHORD_Am_2.0', '!CHORD_0_2.0', '!CHORD_G_2.0', '!CHORD_0_2.0']
+        ],
+        'pesos': [0.3, 0.4, 0.3]
     },
     
     'ACORDES_PULSANTES': {
         'producoes': [
-            # clássica pulsante
-            ['!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0', '!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0'],
-            # melancólica pulsante
-            ['!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0', '!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0'],
-            # animada pulsante
-            ['!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0', '!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0']
+            ['!CHORD_C_1.0', '!CHORD_C_1.0', '!CHORD_C_1.0', '!CHORD_C_1.0', '!CHORD_G_1.0', '!CHORD_G_1.0', '!CHORD_G_1.0', '!CHORD_G_1.0', '!CHORD_Am_1.0', '!CHORD_Am_1.0', '!CHORD_Am_1.0', '!CHORD_Am_1.0', '!CHORD_F_1.0', '!CHORD_F_1.0', '!CHORD_F_1.0', '!CHORD_F_1.0'],
+            ['!CHORD_Am_1.5', '!CHORD_Am_1.5', '!CHORD_Am_1.0', '!CHORD_F_1.5', '!CHORD_F_1.5', '!CHORD_F_1.0', '!CHORD_C_1.5', '!CHORD_C_1.5', '!CHORD_C_1.0', '!CHORD_G_1.5', '!CHORD_G_1.5', '!CHORD_G_1.0']
         ], 
-        'pesos': [0.4, 0.3, 0.3]
+        'pesos': [0.5, 0.5]
     },
     
     'ACORDES_COMPASSADOS': {
         'producoes': [
-            # IV-I-V-vi
-            ['!CHORD_F_4.0', '!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0'],
-            # clássica
-            ['!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0', '!CHORD_F_4.0'],
-            # tensão
-            ['!CHORD_Am_4.0', '!CHORD_G_4.0', '!CHORD_F_4.0', '!CHORD_F_4.0']
+            ['!CHORD_F_1.5', '!CHORD_F_1.5', '!CHORD_F_1.0', '!CHORD_C_1.5', '!CHORD_C_1.5', '!CHORD_C_1.0', '!CHORD_G_1.5', '!CHORD_G_1.5', '!CHORD_G_1.0', '!CHORD_Am_1.5', '!CHORD_Am_1.5', '!CHORD_Am_1.0'],
+            ['!CHORD_0_1.0', '!CHORD_C_1.0', '!CHORD_C_2.0', '!CHORD_0_1.0', '!CHORD_G_1.0', '!CHORD_G_2.0', '!CHORD_0_1.0', '!CHORD_Am_1.0', '!CHORD_Am_2.0', '!CHORD_0_1.0', '!CHORD_F_1.0', '!CHORD_F_2.0']
         ], 
-        'pesos': [0.4, 0.3, 0.3]
+        'pesos': [0.6, 0.4]
     },
     
     'MELODIA_PAUSA': {
@@ -81,11 +79,8 @@ gramatica_pop = {
 
     'MELODIA_ESPARSA': {
         'producoes': [
-            # 1. Original: Subida gradual
             ['!NOTE_60_2.0', '!NOTE_0_2.0', '!NOTE_62_2.0', '!NOTE_0_2.0', '!NOTE_64_2.0', '!NOTE_0_2.0', '!NOTE_65_2.0', '!NOTE_0_2.0'],
-            # 2. Focada nas notas fundamentais de cada acorde (Sol, Ré, Dó, Lá)
             ['!NOTE_67_2.0', '!NOTE_0_2.0', '!NOTE_62_2.0', '!NOTE_0_2.0', '!NOTE_60_2.0', '!NOTE_0_2.0', '!NOTE_69_2.0', '!NOTE_0_2.0'],
-            # 3. Resposta invertida: a pausa vem antes da nota
             ['!NOTE_0_2.0', '!NOTE_64_2.0', '!NOTE_0_2.0', '!NOTE_67_2.0', '!NOTE_0_2.0', '!NOTE_69_2.0', '!NOTE_0_2.0', '!NOTE_60_2.0']
         ], 
         'pesos': [0.4, 0.3, 0.3]
@@ -93,11 +88,8 @@ gramatica_pop = {
     
     'MELODIA_SINCOPADA': {
         'producoes': [
-            # 1. Original: Contratempo clássico (pausa, curta, longa)
             ['!NOTE_0_1.0', '!NOTE_60_1.0', '!NOTE_60_2.0', '!NOTE_0_1.0', '!NOTE_62_1.0', '!NOTE_62_2.0', '!NOTE_0_1.0', '!NOTE_64_1.0', '!NOTE_64_2.0', '!NOTE_0_1.0', '!NOTE_65_1.0', '!NOTE_65_2.0'],
-            # 2. Saltos curtos no contratempo apoiados na pentatônica
             ['!NOTE_0_1.0', '!NOTE_64_1.0', '!NOTE_67_2.0', '!NOTE_0_1.0', '!NOTE_67_1.0', '!NOTE_62_2.0', '!NOTE_0_1.0', '!NOTE_69_1.0', '!NOTE_64_2.0', '!NOTE_0_1.0', '!NOTE_60_1.0', '!NOTE_69_2.0'],
-            # 3. Síncope invertida (longa, pausa, curta)
             ['!NOTE_67_2.0', '!NOTE_0_1.0', '!NOTE_64_1.0', '!NOTE_62_2.0', '!NOTE_0_1.0', '!NOTE_67_1.0', '!NOTE_64_2.0', '!NOTE_0_1.0', '!NOTE_69_1.0', '!NOTE_60_2.0', '!NOTE_0_1.0', '!NOTE_60_1.0']
         ], 
         'pesos': [0.4, 0.3, 0.3]
@@ -105,11 +97,8 @@ gramatica_pop = {
     
     'MELODIA_ENERGICA': {
         'producoes': [
-            # 1. Original: Motivo denso
             ['!NOTE_67_1.0', '!NOTE_67_1.0', '!NOTE_64_2.0', '!NOTE_62_1.0', '!NOTE_62_1.0', '!NOTE_59_2.0', '!NOTE_69_1.0', '!NOTE_69_1.0', '!NOTE_64_2.0', '!NOTE_65_1.0', '!NOTE_65_1.0', '!NOTE_60_2.0'],
-            # 2. Movimento contínuo em semínimas (sem pausas e sem notas longas)
             ['!NOTE_60_1.0', '!NOTE_64_1.0', '!NOTE_67_1.0', '!NOTE_64_1.0', '!NOTE_62_1.0', '!NOTE_67_1.0', '!NOTE_69_1.0', '!NOTE_67_1.0', '!NOTE_69_1.0', '!NOTE_64_1.0', '!NOTE_60_1.0', '!NOTE_64_1.0', '!NOTE_69_1.0', '!NOTE_60_1.0', '!NOTE_64_1.0', '!NOTE_60_1.0'],
-            # 3. Repetição pop (curta, curta, longa com intervalos limpos)
             ['!NOTE_64_1.0', '!NOTE_64_1.0', '!NOTE_60_2.0', '!NOTE_62_1.0', '!NOTE_62_1.0', '!NOTE_67_2.0', '!NOTE_69_1.0', '!NOTE_69_1.0', '!NOTE_64_2.0', '!NOTE_60_1.0', '!NOTE_60_1.0', '!NOTE_69_2.0']
         ], 
         'pesos': [0.4, 0.3, 0.3]
@@ -157,15 +146,20 @@ if __name__ == "__main__":
     configuracoes = {
         "musica_1_generica.mid": 0.1,  
         "musica_2_padrao.mid": 1.0,    
-        "musica_3_experimental.mid": 2.5 
+        "musica_3_experimental.mid": 2.5,
+        "musica_4_intermediaria.mid": 0.5,
+        "musica_5_variada.mid": 1.5
     }
 
     for nome_arquivo, temp in configuracoes.items():
-        print(f"Gerando {nome_arquivo} com Temperatura {temp}")
         # gera lista de terminais
         lista_final = expandir('MUSICA', gramatica_pop, temperatura=temp)
 
+        tom_aleatorio = random.randint(-5, 6)  # offset entre -5 e +5 semitons
+        print(f"Offset de {tom_aleatorio} semitons.")
+
+
         # print(lista_final[:30])
-        
+
         # envia a lista de terminais pro parser
         gerar_midi(lista_final, nome_arquivo)
