@@ -1,6 +1,6 @@
 # TP1 - Composição Musical Algorítmica
 
-Esse repositório contém a implementação de um gerador estocástico de música pop baseado em Gramáticas Generativas Não-Determinísticas, desenvolvido como Trabalho Prático 1 da disciplina de IA Generativa Para Música
+Esse repositório contém a implementação de um gerador estocástico de música pop baseado em Gramáticas Generativas Não-Determinísticas, desenvolvido como Trabalho Prático 1 da disciplina de IA Generativa Para Música.
 
 O sistema utiliza uma arquitetura de Pilha de Tempo para garantir o paralelismo entre a base harmônica e a melodia, operando sobre a escala pentatônica de Dó Maior com transposição dinâmica (offset) para as 12 tonalidades ocidentais. A entropia da geração é controlada por um hiperparâmetro de temperatura.
 
