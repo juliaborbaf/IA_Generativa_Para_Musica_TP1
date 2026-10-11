@@ -40,13 +40,39 @@ gramatica_pop = {
 
     # micro
     'ACORDES_LONGOS': {
-        'producoes': [['!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0', '!CHORD_F_4.0']], 'pesos': [1.0]
+        'producoes': [
+            # I-V-vi-IV
+            ['!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0', '!CHORD_F_4.0'],
+            # vi-IV-I-V
+            ['!CHORD_Am_4.0', '!CHORD_F_4.0', '!CHORD_C_4.0', '!CHORD_G_4.0'],
+            # I-IV-vi-V
+            ['!CHORD_C_4.0', '!CHORD_F_4.0', '!CHORD_Am_4.0', '!CHORD_G_4.0']
+        ], 
+        'pesos': [0.4, 0.3, 0.3]
     },
+    
     'ACORDES_PULSANTES': {
-        'producoes': [['!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0', '!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0']], 'pesos': [1.0]
+        'producoes': [
+            # clássica pulsante
+            ['!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0', '!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0'],
+            # melancólica pulsante
+            ['!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0', '!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0'],
+            # animada pulsante
+            ['!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0', '!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0']
+        ], 
+        'pesos': [0.4, 0.3, 0.3]
     },
+    
     'ACORDES_COMPASSADOS': {
-        'producoes': [['!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0', '!CHORD_F_4.0']], 'pesos': [1.0]
+        'producoes': [
+            # IV-I-V-vi
+            ['!CHORD_F_4.0', '!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0'],
+            # clássica
+            ['!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0', '!CHORD_F_4.0'],
+            # tensão
+            ['!CHORD_Am_4.0', '!CHORD_G_4.0', '!CHORD_F_4.0', '!CHORD_F_4.0']
+        ], 
+        'pesos': [0.4, 0.3, 0.3]
     },
     
     'MELODIA_PAUSA': {
@@ -139,6 +165,7 @@ if __name__ == "__main__":
         # gera lista de terminais
         lista_final = expandir('MUSICA', gramatica_pop, temperatura=temp)
 
-        print(lista_final[:30])
+        # print(lista_final[:30])
+        
         # envia a lista de terminais pro parser
         gerar_midi(lista_final, nome_arquivo)
