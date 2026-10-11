@@ -16,3 +16,29 @@ As bibliotecas necessárias para executar o motor de expansão e gerar os gráfi
 ```bash
 git clone [https://github.com/juliaborbaf/IA_Generativa_Para_Musica_TP1.git](https://github.com/juliaborbaf/IA_Generativa_Para_Musica_TP1.git)
 cd IA_Generativa_Para_Musica_TP1
+```
+
+2. Crie e ative um ambiente virtual (recomendado):
+```bash
+python -m venv venv
+# No Linux/macOS:
+source venv/bin/activate
+# No Windows:
+venv\Scripts\activate
+```
+
+3. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
+
+## Reprodução dos Resultados
+
+Para gerar as músicas e reproduzir os resultados, execute o script principal:
+```bash
+python gerador.py
+```
+Para gerar e visualizar o gráfico que demonstra o impacto da temperatura nas probabilidades de seleção, execute o script do gráfico:
+```bash
+python grafico_temperatura.py
+```
