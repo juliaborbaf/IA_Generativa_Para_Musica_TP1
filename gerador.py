@@ -1,7 +1,7 @@
 import random
 import math
 import pretty_midi
-
+from parser_midi import gerar_midi
 
 gramatica_pop = {
     # macro
@@ -99,4 +99,18 @@ def expandir(simbolo, regras, temperatura):
         
     return resultado_final
 
-# print(expandir('MUSICA', gramatica_pop, temperatura=1.0))
+
+if __name__ == "__main__":
+    configuracoes = {
+        "musica_1_generica.mid": 0.1,  
+        "musica_2_padrao.mid": 1.0,    
+        "musica_3_experimental.mid": 2.5 
+    }
+
+    for nome_arquivo, temp in configuracoes.items():
+        print(f"Gerando {nome_arquivo} com Temperatura {temp}...")
+        # gera lista de terminais
+        lista_final = expandir('MUSICA', gramatica_pop, temperatura=temp)
+        
+        # envia a lista de terminais pro parser
+        gerar_midi(lista_final, nome_arquivo)
