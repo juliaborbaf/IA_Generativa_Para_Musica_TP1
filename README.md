@@ -42,3 +42,5 @@ Para gerar e visualizar o gráfico que demonstra o impacto da temperatura nas pr
 ```bash
 python grafico_temperatura.py
 ```
+## Assistência de IA e Desenvolvimento
+Parte da formulação da ideia, do refinamento da arquitetura, da criação do dicionário das músicas e da geração de gráficos contou com o auxílio de assistentes de Inteligência Artificial. O histórico das discussões pode ser consultado em: https://share.gemini.google/FwNj6bq1rXtY
