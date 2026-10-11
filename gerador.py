@@ -13,7 +13,7 @@ gramatica_pop = {
         ],
         'pesos': [0.50, 0.30, 0.20]
     },
-    
+
     'INTRO': {
         'producoes': [
             # piano lento com pausa
@@ -51,7 +51,7 @@ gramatica_pop = {
     'ACORDES_LONGOS': {
         'producoes': [
             ['!CHORD_C_4.0', '!CHORD_G_4.0', '!CHORD_Am_4.0', '!CHORD_F_4.0'],
-            ['!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0', '!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0'],            # I-IV-vi-V
+            ['!CHORD_Am_2.0', '!CHORD_Am_2.0', '!CHORD_F_2.0', '!CHORD_F_2.0', '!CHORD_C_2.0', '!CHORD_C_2.0', '!CHORD_G_2.0', '!CHORD_G_2.0'],       
             ['!CHORD_C_2.0', '!CHORD_0_2.0', '!CHORD_F_2.0', '!CHORD_0_2.0', '!CHORD_Am_2.0', '!CHORD_0_2.0', '!CHORD_G_2.0', '!CHORD_0_2.0']
         ],
         'pesos': [0.3, 0.4, 0.3]
