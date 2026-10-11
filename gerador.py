@@ -52,14 +52,41 @@ gramatica_pop = {
     'MELODIA_PAUSA': {
         'producoes': [['!NOTE_0_16.0']], 'pesos': [1.0] # silêncio 16 tempos
     },
+
     'MELODIA_ESPARSA': {
-        'producoes': [['!NOTE_60_2.0', '!NOTE_0_2.0', '!NOTE_62_2.0', '!NOTE_0_2.0', '!NOTE_64_2.0', '!NOTE_0_2.0', '!NOTE_65_2.0', '!NOTE_0_2.0']], 'pesos': [1.0]
+        'producoes': [
+            # 1. Original: Subida gradual
+            ['!NOTE_60_2.0', '!NOTE_0_2.0', '!NOTE_62_2.0', '!NOTE_0_2.0', '!NOTE_64_2.0', '!NOTE_0_2.0', '!NOTE_65_2.0', '!NOTE_0_2.0'],
+            # 2. Focada nas notas fundamentais de cada acorde (Sol, Ré, Dó, Lá)
+            ['!NOTE_67_2.0', '!NOTE_0_2.0', '!NOTE_62_2.0', '!NOTE_0_2.0', '!NOTE_60_2.0', '!NOTE_0_2.0', '!NOTE_69_2.0', '!NOTE_0_2.0'],
+            # 3. Resposta invertida: a pausa vem antes da nota
+            ['!NOTE_0_2.0', '!NOTE_64_2.0', '!NOTE_0_2.0', '!NOTE_67_2.0', '!NOTE_0_2.0', '!NOTE_69_2.0', '!NOTE_0_2.0', '!NOTE_60_2.0']
+        ], 
+        'pesos': [0.4, 0.3, 0.3]
     },
+    
     'MELODIA_SINCOPADA': {
-        'producoes': [['!NOTE_0_1.0', '!NOTE_60_1.0', '!NOTE_60_2.0', '!NOTE_0_1.0', '!NOTE_62_1.0', '!NOTE_62_2.0', '!NOTE_0_1.0', '!NOTE_64_1.0', '!NOTE_64_2.0', '!NOTE_0_1.0', '!NOTE_65_1.0', '!NOTE_65_2.0']], 'pesos': [1.0]
+        'producoes': [
+            # 1. Original: Contratempo clássico (pausa, curta, longa)
+            ['!NOTE_0_1.0', '!NOTE_60_1.0', '!NOTE_60_2.0', '!NOTE_0_1.0', '!NOTE_62_1.0', '!NOTE_62_2.0', '!NOTE_0_1.0', '!NOTE_64_1.0', '!NOTE_64_2.0', '!NOTE_0_1.0', '!NOTE_65_1.0', '!NOTE_65_2.0'],
+            # 2. Saltos curtos no contratempo apoiados na pentatônica
+            ['!NOTE_0_1.0', '!NOTE_64_1.0', '!NOTE_67_2.0', '!NOTE_0_1.0', '!NOTE_67_1.0', '!NOTE_62_2.0', '!NOTE_0_1.0', '!NOTE_69_1.0', '!NOTE_64_2.0', '!NOTE_0_1.0', '!NOTE_60_1.0', '!NOTE_69_2.0'],
+            # 3. Síncope invertida (longa, pausa, curta)
+            ['!NOTE_67_2.0', '!NOTE_0_1.0', '!NOTE_64_1.0', '!NOTE_62_2.0', '!NOTE_0_1.0', '!NOTE_67_1.0', '!NOTE_64_2.0', '!NOTE_0_1.0', '!NOTE_69_1.0', '!NOTE_60_2.0', '!NOTE_0_1.0', '!NOTE_60_1.0']
+        ], 
+        'pesos': [0.4, 0.3, 0.3]
     },
+    
     'MELODIA_ENERGICA': {
-        'producoes': [['!NOTE_67_1.0', '!NOTE_67_1.0', '!NOTE_64_2.0', '!NOTE_62_1.0', '!NOTE_62_1.0', '!NOTE_59_2.0', '!NOTE_69_1.0', '!NOTE_69_1.0', '!NOTE_64_2.0', '!NOTE_65_1.0', '!NOTE_65_1.0', '!NOTE_60_2.0']], 'pesos': [1.0]
+        'producoes': [
+            # 1. Original: Motivo denso
+            ['!NOTE_67_1.0', '!NOTE_67_1.0', '!NOTE_64_2.0', '!NOTE_62_1.0', '!NOTE_62_1.0', '!NOTE_59_2.0', '!NOTE_69_1.0', '!NOTE_69_1.0', '!NOTE_64_2.0', '!NOTE_65_1.0', '!NOTE_65_1.0', '!NOTE_60_2.0'],
+            # 2. Movimento contínuo em semínimas (sem pausas e sem notas longas)
+            ['!NOTE_60_1.0', '!NOTE_64_1.0', '!NOTE_67_1.0', '!NOTE_64_1.0', '!NOTE_62_1.0', '!NOTE_67_1.0', '!NOTE_69_1.0', '!NOTE_67_1.0', '!NOTE_69_1.0', '!NOTE_64_1.0', '!NOTE_60_1.0', '!NOTE_64_1.0', '!NOTE_69_1.0', '!NOTE_60_1.0', '!NOTE_64_1.0', '!NOTE_60_1.0'],
+            # 3. Repetição pop (curta, curta, longa com intervalos limpos)
+            ['!NOTE_64_1.0', '!NOTE_64_1.0', '!NOTE_60_2.0', '!NOTE_62_1.0', '!NOTE_62_1.0', '!NOTE_67_2.0', '!NOTE_69_1.0', '!NOTE_69_1.0', '!NOTE_64_2.0', '!NOTE_60_1.0', '!NOTE_60_1.0', '!NOTE_69_2.0']
+        ], 
+        'pesos': [0.4, 0.3, 0.3]
     }
 }
 
@@ -108,9 +135,10 @@ if __name__ == "__main__":
     }
 
     for nome_arquivo, temp in configuracoes.items():
-        print(f"Gerando {nome_arquivo} com Temperatura {temp}...")
+        print(f"Gerando {nome_arquivo} com Temperatura {temp}")
         # gera lista de terminais
         lista_final = expandir('MUSICA', gramatica_pop, temperatura=temp)
-        
+
+        print(lista_final[:30])
         # envia a lista de terminais pro parser
         gerar_midi(lista_final, nome_arquivo)
